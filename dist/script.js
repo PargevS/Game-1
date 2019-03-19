@@ -34,7 +34,7 @@ function renderBox() {
 
   box.style.height = box.style.width = boxSize + 'px';
   box.style.position = 'absolute';
-  box.style.backgroundColor = '#000';
+  box.style.backgroundColor = '#' + +'';
   box.style.top = getRandom(0, maxTop) + 'px';
   box.style.left = getRandom(0, maxLeft) + 'px';
   box.style.cursor = 'pointer';
@@ -46,3 +46,10 @@ function renderBox() {
 function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
+
+function getRandomColor() {
+  var index = Math.floor(Math.random()) * Math.floor(Math.random() * 10);
+  var colors = ['#FF0000', '#FFC618', '#FF188D', '#A2FF18', '#8E18FF', '#18FF98', '#FFA018', '#FF4C18', '#3FFF18', '#000'];
+  console.log(index);
+}
+getRandomColor();
