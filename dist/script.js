@@ -6,6 +6,16 @@ var $game = document.querySelector('#game');
 $start.addEventListener('click', startGame);
 $game.addEventListener('click', handlBoxClick);
 
+var score = 0;
+
+// handlBoxClick
+function handlBoxClick(ev) {
+  if (ev.target.dataset) {
+    score++;
+    renderBox();
+  }
+}
+
 // start game 
 function startGame(ev) {
   $game.style.backgroundColor = '#fff';
@@ -15,13 +25,24 @@ function startGame(ev) {
 
 // boxes render
 function renderBox() {
+  $game.innerHTML = '';
   var box = document.createElement('div');
-  box.style.height = box.style.width = '50px';
+  var boxSize = getRandom(30, 100);
+  var gameSize = $game.getBoundingClientRect();
+  var maxTop = gameSize.height - boxSize;
+  var maxLeft = gameSize.width - boxSize;
+
+  box.style.height = box.style.width = boxSize + 'px';
   box.style.position = 'absolute';
   box.style.backgroundColor = '#000';
-  box.style.top = '50px';
-  box.style.left = '50px';
+  box.style.top = getRandom(0, maxTop) + 'px';
+  box.style.left = getRandom(0, maxLeft) + 'px';
   box.style.cursor = 'pointer';
+  box.setAttribute('data-box', 'true');
 
   $game.insertAdjacentElement('afterbegin', box);
+}
+
+function getRandom(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
 }
