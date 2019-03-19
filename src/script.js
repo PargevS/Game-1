@@ -4,8 +4,10 @@ const $time = document.querySelector('#time');
 const $result = document.querySelector('#result');
 const $timeHeader = document.querySelector('#time-header');
 const $resultHeader = document.querySelector('#result-header');
+const $gameTime = document.querySelector('#game-time');
 
 $start.addEventListener('click', startGame);
+$gameTime.addEventListener('input',setGameTime);
 
 
 
@@ -26,6 +28,10 @@ function handlBoxClick(ev){
 
 // start game 
 function startGame(ev){
+  score = 0;
+  setGameTime()
+  $gameTime.setAttribute('disabled','true');
+
   isGameStarted = true;
   $game.style.backgroundColor = '#fff';
   $start.classList.add('hide');
@@ -49,10 +55,19 @@ function setGameScore(){
   $result.textContent = score.toString();
 }
 
+// set game time
+function setGameTime(){
+  let time = +$gameTime.value;
+  $time.textContent = time.toFixed(1);
+  $timeHeader.classList.remove('hide');
+  $resultHeader.classList.add('hide');
+}
+
 // end game
 function endGame(){
   isGameStarted = false;
   setGameScore();
+  $gameTime.removeAttribute('disabled');
   $start.classList.remove('hide');
   $game.innerHTML = '';
   $game.style.backgroundColor = '#ccc';
